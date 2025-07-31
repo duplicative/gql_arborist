@@ -4,6 +4,7 @@ import type { ParsedGraphQLData } from '@/react-app/types/graphql';
 
 interface GoJsDiagramProps {
   data: ParsedGraphQLData | null;
+  onUpdate: (data: ParsedGraphQLData) => void;
 }
 
 function initDiagram() {
@@ -56,8 +57,9 @@ function initDiagram() {
           font: 'bold 14px sans-serif',
           margin: new go.Margin(0, 0, 5, 0),
           stroke: '#333',
+          editable: true, // Allow text editing
         },
-        new go.Binding('text', 'label')
+        new go.Binding('text', 'label').makeTwoWay() // Two-way binding
       ),
       $(
         go.TextBlock,
@@ -80,7 +82,7 @@ function initDiagram() {
   return diagram;
 }
 
-export default function GoJsDiagram({ data }: GoJsDiagramProps) {
+export default function GoJsDiagram({ data, onUpdate }: GoJsDiagramProps) {
   if (!data) {
     return (
       <div className="h-full flex items-center justify-center">
@@ -93,6 +95,24 @@ export default function GoJsDiagram({ data }: GoJsDiagramProps) {
       </div>
     );
   }
+
+  const handleModelChange = (e: go.IncrementalData) => {
+    if (!data) return;
+
+    const modifiedNodeData = e.modifiedNodeData;
+    if (!modifiedNodeData) return;
+
+    const newNodes = data.nodes.map(n => {
+      const modified = modifiedNodeData.find(m => m.key === n.id);
+      if (modified) {
+        return { ...n, label: modified.label };
+      }
+      return n;
+    });
+
+    const updatedData = { ...data, nodes: newNodes };
+    onUpdate(updatedData);
+  };
 
   const nodes = data.nodes.map((node) => ({
     key: node.id,
@@ -112,6 +132,7 @@ export default function GoJsDiagram({ data }: GoJsDiagramProps) {
       divClassName="w-full h-full bg-slate-50"
       nodeDataArray={nodes}
       linkDataArray={links}
+      onModelChange={handleModelChange}
     />
   );
 }
