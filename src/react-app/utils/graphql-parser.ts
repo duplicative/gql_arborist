@@ -60,10 +60,11 @@ export function parseGraphQLInput(input: string): ParsedGraphQLData {
   const variables = inputData.variables || {};
   Object.entries(variables).forEach(([key, value]) => {
     const varId = `var-${key}`;
+    const labelValue = typeof value === 'string' ? value : JSON.stringify(value);
     nodes.push({
       id: varId,
       type: 'variable',
-      label: `$${key}`,
+      label: `${key}: ${labelValue}`,
       data: {
         name: key,
         value: value,

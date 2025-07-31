@@ -43,10 +43,20 @@ function initDiagram() {
       },
     },
     $(go.Shape, 'RoundedRectangle', {
-      fill: 'white',
+      fill: 'white', // Default color
       stroke: '#ddd',
       strokeWidth: 1,
-    }),
+    },
+    new go.Binding('fill', 'type', (type) => {
+      if (type === 'fragment') {
+        return '#2ec27eb2';
+      }
+      if (type === 'variable') {
+        return '#f8e45c99';
+      }
+      return 'white';
+    })
+  ),
     $(
       go.Panel,
       'Vertical',
@@ -75,7 +85,7 @@ function initDiagram() {
   diagram.linkTemplate = $(
     go.Link,
     { routing: go.Link.Orthogonal, corner: 10 },
-    $(go.Shape, { strokeWidth: 2, stroke: '#bbb' }),
+    $(go.Shape, { strokeWidth: 2, stroke: '#62a0eacc' }),
     $(go.Shape, { toArrow: 'Standard', stroke: '#bbb', fill: '#bbb' })
   );
 
