@@ -13,6 +13,9 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 5000,
   },
+  optimizeDeps: {
+    include: ['gojs', 'gojs-react'],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
