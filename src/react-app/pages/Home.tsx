@@ -53,11 +53,19 @@ export default function Home() {
         </div>
 
         {/* Diagram Canvas */}
-        <div className={`flex-1 bg-slate-50 dark:bg-gray-800 ${isOutputPanelCollapsed ? '' : 'border-r border-slate-200 dark:border-gray-700'}`}>
+        <div className={`relative flex-1 bg-slate-50 dark:bg-gray-800 ${isOutputPanelCollapsed ? '' : 'border-r border-slate-200 dark:border-gray-700'}`}>
           <GoJsDiagram 
             data={parsedData}
             onUpdate={handleDiagramUpdate}
           />
+          <div className="absolute top-4 right-4 flex flex-col gap-2">
+            <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-2 rounded-md shadow-md text-xs text-slate-600 dark:text-gray-400">
+              Use arrow keys to navigate the canvas
+            </div>
+            <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-2 rounded-md shadow-md text-xs text-slate-600 dark:text-gray-400">
+              Double-click a node to edit its title
+            </div>
+          </div>
         </div>
 
         {/* Output Panel Toggle Button */}
