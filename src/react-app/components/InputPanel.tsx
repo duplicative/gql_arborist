@@ -29,9 +29,9 @@ export default function InputPanel({ onSubmit, error }: InputPanelProps) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-4 border-b border-slate-200">
-        <h2 className="text-lg font-semibold text-slate-800 mb-2">GraphQL Input</h2>
-        <p className="text-sm text-slate-600">
+      <div className="p-4 border-b border-slate-200 dark:border-gray-700">
+        <h2 className="text-lg font-semibold text-slate-800 dark:text-gray-100 mb-2">GraphQL Input</h2>
+        <p className="text-sm text-slate-600 dark:text-gray-400">
           Paste your GraphQL HTTP request body (JSON format)
         </p>
       </div>
@@ -41,22 +41,22 @@ export default function InputPanel({ onSubmit, error }: InputPanelProps) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Paste your GraphQL request JSON here..."
-          className="w-full h-full resize-none border border-slate-300 rounded-lg p-3 text-sm font-mono bg-slate-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+          className="w-full h-full resize-none border border-slate-300 rounded-lg p-3 text-sm font-mono bg-slate-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:bg-gray-700 dark:focus:border-blue-500"
         />
       </div>
 
       {error && (
-        <div className="mx-4 mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
+        <div className="mx-4 mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2 dark:bg-red-900/20 dark:border-red-800/50">
           <AlertCircle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
-          <div className="text-sm text-red-700">{error}</div>
+          <div className="text-sm text-red-700 dark:text-red-400">{error}</div>
         </div>
       )}
 
-      <div className="p-4 border-t border-slate-200 space-y-2">
+      <div className="p-4 border-t border-slate-200 dark:border-gray-700 space-y-2">
         <button
           onClick={handleSubmit}
           disabled={!input.trim()}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 dark:disabled:bg-gray-600"
         >
           <Play className="w-4 h-4" />
           Visualize Query
@@ -64,7 +64,7 @@ export default function InputPanel({ onSubmit, error }: InputPanelProps) {
         
         <button
           onClick={handleLoadExample}
-          className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2 px-4 rounded-lg transition-colors"
+          className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2 px-4 rounded-lg transition-colors dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-300"
         >
           Load Example
         </button>

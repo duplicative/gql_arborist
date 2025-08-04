@@ -36,24 +36,24 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
       {/* Header */}
-      <div className="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
+      <div className="border-b border-slate-200 bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 dark:border-gray-700">
         <div className="px-6 py-4">
-          <h1 className="text-2xl font-bold text-slate-800">GraphQL Canvas</h1>
-          <p className="text-sm text-slate-600 mt-1">Visual GraphQL query builder and editor</p>
+          <h1 className="text-2xl font-bold text-slate-800 dark:text-gray-100">GraphQL Canvas</h1>
+          <p className="text-sm text-slate-600 mt-1 dark:text-gray-400">Visual GraphQL query builder and editor</p>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="flex h-[calc(100vh-80px)]">
         {/* Input Panel */}
-        <div className="w-1/3 border-r border-slate-200 bg-white">
+        <div className="w-1/3 border-r border-slate-200 bg-white dark:bg-gray-900 dark:border-gray-700">
           <InputPanel onSubmit={handleInputSubmit} error={error} />
         </div>
 
         {/* Diagram Canvas */}
-        <div className={`flex-1 bg-slate-50 ${isOutputPanelCollapsed ? '' : 'border-r border-slate-200'}`}>
+        <div className={`flex-1 bg-slate-50 dark:bg-gray-800 ${isOutputPanelCollapsed ? '' : 'border-r border-slate-200 dark:border-gray-700'}`}>
           <GoJsDiagram 
             data={parsedData}
             onUpdate={handleDiagramUpdate}
@@ -62,10 +62,10 @@ export default function Home() {
 
         {/* Output Panel Toggle Button */}
         {isOutputPanelCollapsed && (
-          <div className="flex items-center bg-white border-l border-slate-200">
+          <div className="flex items-center bg-white border-l border-slate-200 dark:bg-gray-900 dark:border-gray-700">
             <button
               onClick={() => setIsOutputPanelCollapsed(false)}
-              className="h-full w-10 flex items-center justify-center bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 transition-colors border-r border-slate-200"
+              className="h-full w-10 flex items-center justify-center bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 transition-colors dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
               title="Show Output Panel"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -75,10 +75,10 @@ export default function Home() {
 
         {/* Output Panel */}
         {!isOutputPanelCollapsed && (
-          <div className="w-1/3 border-l border-slate-200 bg-white relative">
+          <div className="w-1/3 border-l border-slate-200 bg-white relative dark:bg-gray-900 dark:border-gray-700">
             <button
               onClick={() => setIsOutputPanelCollapsed(true)}
-              className="absolute top-4 right-4 z-10 p-1.5 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 rounded border border-slate-200 shadow-sm transition-colors"
+              className="absolute top-4 right-4 z-10 p-1.5 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-800 rounded border border-slate-200 shadow-sm transition-colors dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-400 dark:hover:text-gray-200 dark:border-gray-600"
               title="Hide Output Panel"
             >
               <ChevronRight className="w-4 h-4" />
