@@ -48,6 +48,15 @@ function initDiagram() {
       strokeWidth: 1,
     },
     new go.Binding('fill', 'type', (type) => {
+      if (document.documentElement.classList.contains('dark')) {
+        if (type === 'fragment') {
+          return '#2ec27eb2';
+        }
+        if (type === 'variable') {
+          return '#f8e45c99';
+        }
+        return '#374151'; // dark:bg-gray-700
+      }
       if (type === 'fragment') {
         return '#2ec27eb2';
       }
@@ -69,6 +78,7 @@ function initDiagram() {
           stroke: '#333',
           editable: true, // Allow text editing
         },
+        new go.Binding('stroke', '', () => document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#333'),
         new go.Binding('text', 'label').makeTwoWay() // Two-way binding
       ),
       $(
@@ -77,6 +87,7 @@ function initDiagram() {
           font: '12px sans-serif',
           stroke: '#666',
         },
+        new go.Binding('stroke', '', () => document.documentElement.classList.contains('dark') ? '#d1d5db' : '#666'),
         new go.Binding('text', 'type', (type) => `Type: ${type}`)
       )
     )
@@ -96,7 +107,7 @@ export default function GoJsDiagram({ data, onUpdate }: GoJsDiagramProps) {
   if (!data) {
     return (
       <div className="h-full flex items-center justify-center">
-        <div className="text-center text-slate-500">
+        <div className="text-center text-slate-500 dark:text-gray-400">
           <h3 className="text-lg font-medium mb-2">No Query Loaded</h3>
           <p className="text-sm">
             Paste a GraphQL request in the input panel to get started
@@ -139,7 +150,7 @@ export default function GoJsDiagram({ data, onUpdate }: GoJsDiagramProps) {
   return (
     <ReactDiagram
       initDiagram={initDiagram}
-      divClassName="w-full h-full bg-slate-50"
+      divClassName="w-full h-full bg-slate-50 dark:bg-gray-800"
       nodeDataArray={nodes}
       linkDataArray={links}
       onModelChange={handleModelChange}
